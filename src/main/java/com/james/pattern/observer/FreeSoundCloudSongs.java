@@ -8,11 +8,11 @@ import java.util.Observer;
 /**
  * Created by user on 27/10/16.
  */
-public class AllSongs implements Observer {
+public class FreeSoundCloudSongs implements Observer {
     Observable observable;
     private Collection<Song> songs;
 
-    public AllSongs(Observable observable) {
+    public FreeSoundCloudSongs(Observable observable) {
         this.observable = observable;
         observable.addObserver(this);
     }

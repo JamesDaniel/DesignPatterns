@@ -10,7 +10,7 @@ public class MusicRunner {
         SoundCloud sc = new SoundCloud();
         sc.setSongs(new ArrayList());
 
-        AllSongs songs = new AllSongs(sc);
+        FreeSoundCloudSongs songs = new FreeSoundCloudSongs(sc);
 
         sc.addSong(new Song());
     }
