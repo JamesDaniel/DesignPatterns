@@ -2,6 +2,7 @@ package com.james.main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 /**
  * This module contains the presentation logic for a music player.
@@ -10,6 +11,7 @@ import java.awt.*;
 public class AppRunner extends JFrame{
     private JButton play;
     private JButton stop;
+    private SongPlayer songPlayer;
     private AppRunner() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400,120);
@@ -29,6 +31,8 @@ public class AppRunner extends JFrame{
         this.add(play);
         this.add(stop);
         this.setVisible(true);
+
+        songPlayer = new SongPlayer("test.mp3");
     }
 
     //
@@ -61,22 +65,28 @@ public class AppRunner extends JFrame{
 
     // Event handler methods
     private void nextSong() {
-        System.out.println("next song");
+        songPlayer.nextSong();
     }
     private void prevSong() {
-        System.out.println("previous song");
+        songPlayer.prevSong();
     }
     private void exit() {
-        System.out.println("exiting");
+        System.exit(0);
     }
     private void openFile() {
-        System.out.println("opening file");
+        new File("data/test.mp3");
+        JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(this);
+
+        String filePath = fc.getSelectedFile().getAbsolutePath();
+        System.out.println("opening file " + filePath);
+        songPlayer.setSongFilePath(filePath);
     }
     private void play() {
-        System.out.println("playing music player");
+        songPlayer.playSong();
     }
     private void stop() {
-        System.out.println("stopping music player");
+        songPlayer.stopSong();
     }
 
     public static void main(String ... args) {
