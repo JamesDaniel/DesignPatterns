@@ -7,9 +7,6 @@ import javax.swing.*;
  */
 public class ObservingLabel extends JLabel implements Observer {
     private String playDuration;
-    public ObservingLabel () {
-        super();
-    }
     public ObservingLabel (String labelText) {
         super(labelText);
     }

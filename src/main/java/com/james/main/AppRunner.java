@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class AppRunner extends JFrame{
     private SongPlayer songPlayer;
-    private ObservingLabel playTimeLabel;
+
     private AppRunner() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400,120);
@@ -19,7 +19,7 @@ public class AppRunner extends JFrame{
         JButton play = new JButton("Play");
         JButton stop = new JButton("Stop");
         JMenuBar menuBar = new JMenuBar();
-        playTimeLabel = new ObservingLabel("00:00:00");
+        ObservingLabel playTimeLabel = new ObservingLabel("00:00:00");
         this.setJMenuBar(menuBar);
         menuBar.add(createFileMenu());
         menuBar.add(createEditMenu());
@@ -33,15 +33,11 @@ public class AppRunner extends JFrame{
         this.add(playTimeLabel);
         this.setVisible(true);
 
-        songPlayer = new SongPlayer(this);
-    }
-    public ArrayList<Observer> getObservers() {
-        ArrayList<Observer> list = new ArrayList<>();
-        list.add(playTimeLabel);
-        return list;
+        ArrayList<Observer> observingComponents = new ArrayList<>();
+        observingComponents.add(playTimeLabel);
+        songPlayer = new SongPlayer(observingComponents);
     }
 
-    //
     private JMenu createFileMenu() {
         JMenu menu = new JMenu("File");
 

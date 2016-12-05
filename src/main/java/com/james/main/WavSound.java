@@ -3,10 +3,7 @@ package com.james.main;
 /**
  * @author James McGarr
  */
-public class WavSound implements SoundBehaviour {
-    public WavSound() {
-
-    }
+public class WavSound extends ObservableSoundBehaviour implements SoundBehaviour {
     public void playSoundFile() {
         System.out.println("Playing wav from strategy");
     }

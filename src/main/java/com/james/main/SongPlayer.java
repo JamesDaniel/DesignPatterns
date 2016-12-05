@@ -2,40 +2,50 @@ package com.james.main;
 
 import org.apache.commons.io.FilenameUtils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author James McGarr.
  */
 public class SongPlayer {
-    private SoundBehaviour soundBehaviour;
-    private AppRunner app;
+    private ObservableSoundBehaviour observableSoundBehaviour;
+    private List<Observer> observers;
 
-    public SongPlayer(AppRunner app) {
-        this.app = app;
+    public SongPlayer(List<Observer> observers) {
+        registerObservers(observers);
         setAlgorithmForSong(SongFile.getInstance().getSongPath());
+    }
+    public void registerObservers(List<Observer> observers) {
+        this.observers = observers;
+    }
+    public List<Observer> getObservers() {
+        return this.observers;
     }
     public void setAlgorithmForSong(String songPath) {
         String ext = FilenameUtils.getExtension(songPath);
 
         switch (ext) {
             case "mp3":
-                soundBehaviour = new Mp3Sound(new ArrayList());
-                ((ObservableSoundDecoders)soundBehaviour).registerObservers(app.getObservers());
+                observableSoundBehaviour = new Mp3Sound();
+                observableSoundBehaviour.registerObservers(getObservers()); // todo | every time a song is played a algorithm is
+                                                                            // todo | created to decode the file. This knocks off
+                                                                            // todo | previously attached observers. Any better solution?
                 break;
             case "wav":
-                soundBehaviour = new WavSound();
+                observableSoundBehaviour = new WavSound();
+                observableSoundBehaviour.registerObservers(getObservers());
                 break;
             default:
-                soundBehaviour = new DumSound();
+                observableSoundBehaviour = new DumSound();
+                observableSoundBehaviour.registerObservers(getObservers());
                 System.out.println("No strategy for file with extension ." + ext);
         }
     }
     public void playSong() {
-        soundBehaviour.playSoundFile();
+        observableSoundBehaviour.playSoundFile();
     }
     public void stopSong() {
-        soundBehaviour.stopSoundFile();
+        observableSoundBehaviour.stopSoundFile();
     }
     public void nextSong() {
         System.out.println("song player next song");

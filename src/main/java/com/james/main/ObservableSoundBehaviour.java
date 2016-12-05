@@ -8,13 +8,10 @@ import java.util.List;
 /**
  * @author James McGarr
  */
-public abstract class ObservableSoundDecoders implements Subject {
+public abstract class ObservableSoundBehaviour implements Observable, SoundBehaviour {
     private List<Observer> observers;
     private String playDuration;
 
-    public ObservableSoundDecoders(List observers) {
-        this.observers = observers;
-    }
     public void registerObservers(List<Observer> o) {
         this.observers = o;
     }

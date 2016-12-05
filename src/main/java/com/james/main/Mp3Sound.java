@@ -2,26 +2,11 @@ package com.james.main;
 
 import javazoom.jl.player.Player;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 /**
  * @author James McGarr
  */
-public class Mp3Sound extends ObservableSoundDecoders implements SoundBehaviour {
+public class Mp3Sound extends ObservableSoundBehaviour implements SoundBehaviour {
     private boolean playing;
-    private int playDuration;
-    public Mp3Sound(List l) {
-        super(l);
-    }
-
-    private String getPlayDuration() {
-        Date date = new Date(this.playDuration - 3600000);
-        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        return formatter.format(date);
-    }
     public void playSoundFile() {
         if (playing == true)
             return;

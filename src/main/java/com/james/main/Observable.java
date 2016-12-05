@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author James McGarr
  */
-public interface Subject {
+public interface Observable {
     void registerObservers(List<Observer> o);
     void removeObserver(Observer o);
     void notifyObservers();
