@@ -8,9 +8,8 @@ import org.apache.commons.io.FilenameUtils;
 public class SongPlayer {
     public static int numberOfSongPlayers = 0;
     private SoundBehaviour soundBehaviour;
-    private static SongPlayer instance = null;
 
-    private SongPlayer(String songPath) {
+    public SongPlayer(String songPath) {
         setSongFilePath(songPath);
         numberOfSongPlayers++;
         System.out.println("number of song players = " + numberOfSongPlayers);
@@ -20,7 +19,7 @@ public class SongPlayer {
 
         switch (ext) {
             case "mp3":
-                soundBehaviour = Mp3Sound.getInstance(songPath);
+                soundBehaviour = new Mp3Sound(songPath);
                 break;
             case "wav":
                 soundBehaviour = new WavSound(songPath);
@@ -41,12 +40,5 @@ public class SongPlayer {
     }
     public void prevSong() {
         System.out.println("song player previous song");
-    }
-
-    public static SongPlayer getInstance(String songPath) {
-        if (instance == null) {
-            instance = new SongPlayer(songPath);
-        }
-        return instance;
     }
 }

@@ -9,8 +9,6 @@ import java.io.FileInputStream;
  * @author James McGarr
  */
 public class Mp3Sound implements SoundBehaviour {
-    private static Mp3MusicRunnable threadInstance;
-    private static SoundBehaviour instance = null;
     private boolean playing;
     private String songPath;
     public Mp3Sound(String songPath) {
@@ -51,16 +49,4 @@ public class Mp3Sound implements SoundBehaviour {
             }
         }
     }
-    public static Mp3MusicRunnable getRunnableInstance() throws Exception {
-        if (threadInstance == null) {
-            threadInstance = new Mp3MusicRunnable();
-        }
-    }
-    public static SoundBehaviour getInstance(String songPath) {
-        if (instance == null) {
-            instance = new Mp3Sound(songPath);
-        }
-        return instance;
-    }
-
 }

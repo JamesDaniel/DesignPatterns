@@ -32,7 +32,7 @@ public class AppRunner extends JFrame{
         this.add(stop);
         this.setVisible(true);
 
-        songPlayer = SongPlayer.getInstance("data/test.mp3");
+        songPlayer = new SongPlayer("data/test.mp3");
     }
 
     //
@@ -80,7 +80,7 @@ public class AppRunner extends JFrame{
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             String filePath = fc.getSelectedFile().getAbsolutePath();
             System.out.println("opening file " + filePath);
-            songPlayer = SongPlayer.getInstance(filePath);
+            songPlayer = new SongPlayer(filePath);
         }
     }
     private void play() {
