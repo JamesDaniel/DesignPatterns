@@ -29,7 +29,6 @@ public class AppRunner extends JFrame{
         this.add(stop);
         this.setVisible(true);
 
-        SongFile.getInstance().setSongPath("data/test.mp3");
         songPlayer = new SongPlayer();
     }
 

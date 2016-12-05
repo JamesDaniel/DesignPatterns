@@ -8,14 +8,13 @@ import java.io.FileInputStream;
  */
 public class SongFile {
     private String songPath;
-    private static SongFile instance;
 
     private SongFile() {}
     public void setSongPath(String songPath) {
         this.songPath = songPath;
     }
     public String getSongPath() {
-        return this.songPath;
+        return this.songPath != null ? this.songPath : "";
     }
     public FileInputStream getFileInputStream() {
         FileInputStream fis = null;
@@ -27,10 +26,10 @@ public class SongFile {
         }
         return fis;
     }
+    private static class LazyHolder {
+        private static final SongFile INSTANCE = new SongFile();
+    }
     public static SongFile getInstance() {
-        if (instance == null) {
-            instance = new SongFile();
-        }
-        return instance;
+        return LazyHolder.INSTANCE;
     }
 }
