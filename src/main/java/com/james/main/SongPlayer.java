@@ -6,15 +6,12 @@ import org.apache.commons.io.FilenameUtils;
  * @author James McGarr.
  */
 public class SongPlayer {
-    public static int numberOfSongPlayers = 0;
     private SoundBehaviour soundBehaviour;
 
-    public SongPlayer(String songPath) {
-        setSongFilePath(songPath);
-        numberOfSongPlayers++;
-        System.out.println("number of song players = " + numberOfSongPlayers);
+    public SongPlayer() {
+        setAlgorithmForSong(SongFile.getInstance().getSongPath());
     }
-    private void setSongFilePath(String songPath) {
+    public void setAlgorithmForSong(String songPath) {
         String ext = FilenameUtils.getExtension(songPath);
 
         switch (ext) {
