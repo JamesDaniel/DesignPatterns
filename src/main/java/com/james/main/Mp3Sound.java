@@ -2,13 +2,25 @@ package com.james.main;
 
 import javazoom.jl.player.Player;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author James McGarr
  */
-public class Mp3Sound implements SoundBehaviour {
+public class Mp3Sound extends ObservableSoundDecoders implements SoundBehaviour {
     private boolean playing;
-    public Mp3Sound() {
+    private int playDuration;
+    public Mp3Sound(List l) {
+        super(l);
+    }
 
+    private String getPlayDuration() {
+        Date date = new Date(this.playDuration - 3600000);
+        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        return formatter.format(date);
     }
     public void playSoundFile() {
         if (playing == true)
@@ -35,13 +47,16 @@ public class Mp3Sound implements SoundBehaviour {
         public void run() {
             try {
                 while (super.play(1)) {
+                    setPlayDuration(super.getPosition());
                     if (!playing) {
                         super.close();
                     }
                 }
+                setPlayDuration(0);
                 System.out.println("Finished decoding mp3 or playing stopped.");
             } catch (Exception ex) {
                 System.out.println("An exception occurred while decoding an mp3 file.");
+                ex.printStackTrace();
             }
         }
     }

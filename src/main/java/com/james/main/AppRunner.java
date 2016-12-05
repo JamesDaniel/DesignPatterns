@@ -2,6 +2,7 @@ package com.james.main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * This module contains the presentation logic for a music player.
@@ -9,6 +10,7 @@ import java.awt.*;
  */
 public class AppRunner extends JFrame{
     private SongPlayer songPlayer;
+    private ObservingLabel playTimeLabel;
     private AppRunner() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400,120);
@@ -17,6 +19,7 @@ public class AppRunner extends JFrame{
         JButton play = new JButton("Play");
         JButton stop = new JButton("Stop");
         JMenuBar menuBar = new JMenuBar();
+        playTimeLabel = new ObservingLabel("00:00:00");
         this.setJMenuBar(menuBar);
         menuBar.add(createFileMenu());
         menuBar.add(createEditMenu());
@@ -27,9 +30,15 @@ public class AppRunner extends JFrame{
         this.setJMenuBar(menuBar);
         this.add(play);
         this.add(stop);
+        this.add(playTimeLabel);
         this.setVisible(true);
 
-        songPlayer = new SongPlayer();
+        songPlayer = new SongPlayer(this);
+    }
+    public ArrayList<Observer> getObservers() {
+        ArrayList<Observer> list = new ArrayList<>();
+        list.add(playTimeLabel);
+        return list;
     }
 
     //
