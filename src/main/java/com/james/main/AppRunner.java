@@ -32,7 +32,7 @@ public class AppRunner extends JFrame{
         this.add(stop);
         this.setVisible(true);
 
-        songPlayer = new SongPlayer("test.mp3");
+        songPlayer = SongPlayer.getInstance("data/test.mp3");
     }
 
     //
@@ -74,13 +74,14 @@ public class AppRunner extends JFrame{
         System.exit(0);
     }
     private void openFile() {
-        new File("data/test.mp3");
         JFileChooser fc = new JFileChooser();
-        fc.showOpenDialog(this);
+        int returnVal = fc.showOpenDialog(this);
 
-        String filePath = fc.getSelectedFile().getAbsolutePath();
-        System.out.println("opening file " + filePath);
-        songPlayer.setSongFilePath(filePath);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            String filePath = fc.getSelectedFile().getAbsolutePath();
+            System.out.println("opening file " + filePath);
+            songPlayer = SongPlayer.getInstance(filePath);
+        }
     }
     private void play() {
         songPlayer.playSong();
