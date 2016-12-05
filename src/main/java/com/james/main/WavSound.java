@@ -4,7 +4,7 @@ package com.james.main;
  * @author James McGarr
  */
 public class WavSound implements SoundBehaviour {
-    public WavSound(String songPath) {
+    public WavSound() {
 
     }
     public void playSoundFile() {

@@ -2,17 +2,13 @@ package com.james.main;
 
 import javazoom.jl.player.Player;
 
-import java.io.File;
-import java.io.FileInputStream;
-
 /**
  * @author James McGarr
  */
 public class Mp3Sound implements SoundBehaviour {
     private boolean playing;
-    private String songPath;
-    public Mp3Sound(String songPath) {
-        this.songPath = songPath;
+    public Mp3Sound() {
+
     }
     public void playSoundFile() {
         if (playing == true)
@@ -34,7 +30,7 @@ public class Mp3Sound implements SoundBehaviour {
     private class Mp3MusicRunnable extends Player implements Runnable {
 
         public Mp3MusicRunnable() throws Exception {
-            super(new FileInputStream(new File(songPath))); // todo change this
+            super(SongFile.getInstance().getFileInputStream());
         }
         public void run() {
             try {
@@ -43,9 +39,9 @@ public class Mp3Sound implements SoundBehaviour {
                         super.close();
                     }
                 }
-                System.out.println("bugged out");
+                System.out.println("Finished decoding mp3 or playing stopped.");
             } catch (Exception ex) {
-                System.out.println("an exception occurred while decoding an mp3 file");
+                System.out.println("An exception occurred while decoding an mp3 file.");
             }
         }
     }

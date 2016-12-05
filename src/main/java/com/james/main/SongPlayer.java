@@ -16,10 +16,10 @@ public class SongPlayer {
 
         switch (ext) {
             case "mp3":
-                soundBehaviour = new Mp3Sound(songPath);
+                soundBehaviour = new Mp3Sound();
                 break;
             case "wav":
-                soundBehaviour = new WavSound(songPath);
+                soundBehaviour = new WavSound();
                 break;
             default:
                 soundBehaviour = new DumSound();

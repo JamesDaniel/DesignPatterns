@@ -2,23 +2,20 @@ package com.james.main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 /**
  * This module contains the presentation logic for a music player.
  * @author James McGarr
  */
 public class AppRunner extends JFrame{
-    private JButton play;
-    private JButton stop;
     private SongPlayer songPlayer;
     private AppRunner() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400,120);
         this.setLayout(new FlowLayout());
 
-        play = new JButton("Play");
-        stop = new JButton("Stop");
+        JButton play = new JButton("Play");
+        JButton stop = new JButton("Stop");
         JMenuBar menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
         menuBar.add(createFileMenu());
