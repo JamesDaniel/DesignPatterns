@@ -8,7 +8,7 @@ import java.util.List;
  * @author James McGarr.
  */
 public class SongPlayer {
-    private ObservableSoundBehaviour observableSoundBehaviour;
+    private SoundBehaviour soundBehaviour;
     private List<Observer> observers;
 
     public SongPlayer(List<Observer> observers) {
@@ -26,26 +26,26 @@ public class SongPlayer {
 
         switch (ext) {
             case "mp3":
-                observableSoundBehaviour = new Mp3Sound();
-                observableSoundBehaviour.registerObservers(getObservers()); // todo | every time a song is played a algorithm is
+                soundBehaviour = new Mp3Sound();
+                soundBehaviour.registerObservers(getObservers()); // todo | every time a song is played a algorithm is
                                                                             // todo | created to decode the file. This knocks off
                                                                             // todo | previously attached observers. Any better solution?
                 break;
             case "wav":
-                observableSoundBehaviour = new WavSound();
-                observableSoundBehaviour.registerObservers(getObservers());
+                soundBehaviour = new WavSound();
+                soundBehaviour.registerObservers(getObservers());
                 break;
             default:
-                observableSoundBehaviour = new DumSound();
-                observableSoundBehaviour.registerObservers(getObservers());
+                soundBehaviour = new DumSound();
+                soundBehaviour.registerObservers(getObservers());
                 System.out.println("No strategy for file with extension ." + ext);
         }
     }
     public void playSong() {
-        observableSoundBehaviour.playSoundFile();
+        soundBehaviour.playSoundFile();
     }
     public void stopSong() {
-        observableSoundBehaviour.stopSoundFile();
+        soundBehaviour.stopSoundFile();
     }
     public void nextSong() {
         System.out.println("song player next song");

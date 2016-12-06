@@ -9,4 +9,6 @@ public interface Observable {
     void registerObservers(List<Observer> o);
     void removeObserver(Observer o);
     void notifyObservers();
+    void playDurationChanged();
+    void setPlayDuration(String playDuration);
 }

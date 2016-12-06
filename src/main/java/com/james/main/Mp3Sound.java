@@ -2,27 +2,21 @@ package com.james.main;
 
 import javazoom.jl.player.Player;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author James McGarr
  */
-public class Mp3Sound extends ObservableSoundBehaviour implements SoundBehaviour {
+public class Mp3Sound implements SoundBehaviour {
+    private Observable observable;
     private boolean playing;
-    public void playSoundFile() {
-        if (playing == true)
-            return;
-        playing = true;
-        System.out.println("Playing mp3 from strategy");
 
-        try {
-            Thread soundPlayingThread = new Thread(new Mp3MusicRunnable());
-            soundPlayingThread.start();
-        } catch (Exception ex) {
-            System.out.println("Thread exception in Mp3Sound.java");
-            ex.printStackTrace();
-        }
-    }
-    public void stopSoundFile() {
-        playing = false;
+    // Mp3Sound Code
+    public Mp3Sound() {
+        observable = new ObservableSoundBehaviour();
     }
     private class Mp3MusicRunnable extends Player implements Runnable {
 
@@ -45,4 +39,43 @@ public class Mp3Sound extends ObservableSoundBehaviour implements SoundBehaviour
             }
         }
     }
+    public void setPlayDuration(int playDuration) {
+        Date date = new Date(playDuration - 3600000);
+        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        observable.setPlayDuration(formatter.format(date));
+
+        observable.playDurationChanged();
+    }
+
+    // Contract with Observable interface
+    public void registerObservers(List<Observer> o) {
+        observable.registerObservers(o);
+    }
+    public void notifyObservers() {
+        observable.notifyObservers();
+    }
+    public void removeObserver(Observer o) {
+        observable.removeObserver(o);
+    }
+    public void setPlayDuration(String playDuration) {}
+
+    // Contract with SoundBehaviour interface
+    public void playSoundFile() {
+        if (playing == true)
+            return;
+        playing = true;
+        System.out.println("Playing mp3 from strategy");
+
+        try {
+            Thread soundPlayingThread = new Thread(new Mp3MusicRunnable());
+            soundPlayingThread.start();
+        } catch (Exception ex) {
+            System.out.println("Thread exception in Mp3Sound.java");
+            ex.printStackTrace();
+        }
+    }
+    public void stopSoundFile() {
+        playing = false;
+    }
+    public void playDurationChanged() {}
 }

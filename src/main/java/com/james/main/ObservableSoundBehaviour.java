@@ -1,17 +1,23 @@
 package com.james.main;
 
+import com.james.pattern.strategy.*;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * @author James McGarr
  */
-public abstract class ObservableSoundBehaviour implements Observable, SoundBehaviour {
-    private List<Observer> observers;
+public class ObservableSoundBehaviour implements Observable {
+    private List<Observer> observers = new ArrayList<>();
     private String playDuration;
 
+    public void setPlayDuration(String playDuration) {
+        this.playDuration = playDuration;
+    }
     public void registerObservers(List<Observer> o) {
         this.observers = o;
     }
@@ -28,12 +34,5 @@ public abstract class ObservableSoundBehaviour implements Observable, SoundBehav
     }
     public void playDurationChanged() {
         notifyObservers();
-    }
-    public void setPlayDuration(int playDuration) {
-        Date date = new Date(playDuration - 3600000);
-        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        this.playDuration = formatter.format(date);
-
-        playDurationChanged();
     }
 }
