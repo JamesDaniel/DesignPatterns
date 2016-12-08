@@ -10,34 +10,36 @@ import java.util.ArrayList;
  */
 public class AppRunner extends JFrame{
     private SongPlayer songPlayer;
+    private PlayStopButton playStop;
 
     private AppRunner() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400,120);
         this.setLayout(new FlowLayout());
 
-        JButton play = new JButton("Play");
-        JButton stop = new JButton("Stop");
         JMenuBar menuBar = new JMenuBar();
         ObservingLabel playTimeLabel = new ObservingLabel("00:00:00");
         this.setJMenuBar(menuBar);
         menuBar.add(createFileMenu());
         menuBar.add(createEditMenu());
 
-        play.addActionListener(e -> play());
-        stop.addActionListener(e -> stop());
-
         this.setJMenuBar(menuBar);
-        this.add(play);
-        this.add(stop);
         this.add(playTimeLabel);
-        this.setVisible(true);
 
         ArrayList<Observer> observingComponents = new ArrayList<>();
         observingComponents.add(playTimeLabel);
         songPlayer = new SongPlayer(observingComponents);
-    }
 
+
+        playStop = new PlayStopButton("Play", songPlayer);
+        playStop.addActionListener(e -> playStop());
+        this.add(playStop);
+
+        this.setVisible(true);
+    }
+    public void playStop() {
+        playStop.buttonClicked();
+    }
     private JMenu createFileMenu() {
         JMenu menu = new JMenu("File");
 
@@ -85,12 +87,6 @@ public class AppRunner extends JFrame{
             SongFile.getInstance().setSongPath(filePath);
             songPlayer.setAlgorithmForSong(SongFile.getInstance().getSongPath());
         }
-    }
-    private void play() {
-        songPlayer.playSong();
-    }
-    private void stop() {
-        songPlayer.stopSong();
     }
 
     public static void main(String ... args) {
