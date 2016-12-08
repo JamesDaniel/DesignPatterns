@@ -38,18 +38,18 @@ public class AppRunner extends JFrame{
         frontController = new FrontController(playStop, songPlayer);
 
 
-        playStop.addActionListener(e -> playStop());
+        playStop.addActionListener(e -> userEventHandler(USER_EVENT.CLICK_PLAY_STOP));
         this.setVisible(true);
     }
     private JMenu createFileMenu() {
         JMenu menu = new JMenu("File");
 
         JMenuItem item = new JMenuItem("Open");
-        item.addActionListener(e -> openFile());
+        item.addActionListener(e ->  userEventHandler(USER_EVENT.OPEN_FILE));
         menu.add(item);
 
         JMenuItem item2 = new JMenuItem("Exit");
-        item2.addActionListener(e -> exit());
+        item2.addActionListener(e -> userEventHandler(USER_EVENT.EXIT));
         menu.add(item2);
 
         return menu;
@@ -58,31 +58,19 @@ public class AppRunner extends JFrame{
         JMenu menu = new JMenu("Edit");
 
         JMenuItem item = new JMenuItem("Next");
-        item.addActionListener(e -> nextSong());
+        item.addActionListener(e -> userEventHandler(USER_EVENT.CLICK_NEXT));
         menu.add(item);
 
         JMenuItem item2 = new JMenuItem("Prev");
-        item2.addActionListener(e -> prevSong());
+        item2.addActionListener(e -> userEventHandler(USER_EVENT.CLICK_PREV));
         menu.add(item2);
 
         return menu;
     }
 
-    // Event handler methods
-    public void playStop() {
-        frontController.dispatchRequest(USER_EVENT.CLICK_PLAY_STOP);
-    }
-    private void nextSong() {
-        frontController.dispatchRequest(USER_EVENT.CLICK_NEXT);
-    }
-    private void prevSong() {
-        frontController.dispatchRequest(USER_EVENT.CLICK_PREV);
-    }
-    private void exit() {
-        frontController.dispatchRequest(USER_EVENT.EXIT);
-    }
-    private void openFile() {
-        frontController.dispatchRequest(USER_EVENT.OPEN_FILE);
+    // Event handler method
+    public void userEventHandler(USER_EVENT userEvent) {
+        frontController.dispatchRequest(userEvent);
     }
 
     public static void main(String ... args) {
