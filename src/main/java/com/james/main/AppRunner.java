@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class AppRunner extends JFrame{
     private SongPlayer songPlayer;
     private PlayStopButton playStop;
+    private FrontController frontController;
 
     private AppRunner() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,6 +35,10 @@ public class AppRunner extends JFrame{
         playStop = new PlayStopButton("Play", songPlayer);
         this.add(playStop);
 
+        frontController = new FrontController(playStop, songPlayer);
+
+
+        playStop.addActionListener(e -> playStop());
         this.setVisible(true);
     }
     private JMenu createFileMenu() {
@@ -64,25 +69,20 @@ public class AppRunner extends JFrame{
     }
 
     // Event handler methods
+    public void playStop() {
+        frontController.dispatchRequest(USER_EVENT.CLICK_PLAY_STOP);
+    }
     private void nextSong() {
-        songPlayer.nextSong();
+        frontController.dispatchRequest(USER_EVENT.CLICK_NEXT);
     }
     private void prevSong() {
-        songPlayer.prevSong();
+        frontController.dispatchRequest(USER_EVENT.CLICK_PREV);
     }
     private void exit() {
-        System.exit(0);
+        frontController.dispatchRequest(USER_EVENT.EXIT);
     }
     private void openFile() {
-        JFileChooser fc = new JFileChooser();
-        int returnVal = fc.showOpenDialog(this);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            String filePath = fc.getSelectedFile().getAbsolutePath();
-            System.out.println("opening file " + filePath);
-            SongFile.getInstance().setSongPath(filePath);
-            songPlayer.setAlgorithmForSong(SongFile.getInstance().getSongPath());
-        }
+        frontController.dispatchRequest(USER_EVENT.OPEN_FILE);
     }
 
     public static void main(String ... args) {

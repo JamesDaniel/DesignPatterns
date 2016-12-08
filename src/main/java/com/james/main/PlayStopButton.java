@@ -17,10 +17,6 @@ public class PlayStopButton extends JButton {
         playState = new PlayState(this);
         stopState = new StopState(this);
         this.setState(stopState);
-        this.addActionListener(e -> playStop());
-    }
-    public void playStop() {
-        this.buttonClicked();
     }
     public void setSongPlayer(SongPlayer songPlayer) {
         this.songPlayer = songPlayer;
