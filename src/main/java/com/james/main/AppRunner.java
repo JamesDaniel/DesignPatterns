@@ -32,13 +32,9 @@ public class AppRunner extends JFrame{
 
 
         playStop = new PlayStopButton("Play", songPlayer);
-        playStop.addActionListener(e -> playStop());
         this.add(playStop);
 
         this.setVisible(true);
-    }
-    public void playStop() {
-        playStop.buttonClicked();
     }
     private JMenu createFileMenu() {
         JMenu menu = new JMenu("File");
