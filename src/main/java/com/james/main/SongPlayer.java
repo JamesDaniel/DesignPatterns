@@ -15,31 +15,18 @@ public class SongPlayer {
         registerObservers(observers);
         setAlgorithmForSong(SongFile.getInstance().getSongPath());
     }
-    public void registerObservers(List<Observer> observers) {
+    private void registerObservers(List<Observer> observers) {
         this.observers = observers;
     }
-    public List<Observer> getObservers() {
+    private List<Observer> getObservers() {
         return this.observers;
     }
     public void setAlgorithmForSong(String songPath) {
         String ext = FilenameUtils.getExtension(songPath);
 
-        switch (ext) {
-            case "mp3":
-                soundBehaviour = new Mp3Sound();
-                soundBehaviour.registerObservers(getObservers()); // todo | every time a song is played a algorithm is
-                                                                            // todo | created to decode the file. This knocks off
-                                                                            // todo | previously attached observers. Any better solution?
-                break;
-            case "wav":
-                soundBehaviour = new WavSound();
-                soundBehaviour.registerObservers(getObservers());
-                break;
-            default:
-                soundBehaviour = new DumSound();
-                soundBehaviour.registerObservers(getObservers());
-                System.out.println("No strategy for file with extension ." + ext);
-        }
+        soundBehaviour = SoundStrategyFactory.createSoundStrategy(ext);
+        soundBehaviour.registerObservers(getObservers());
+
     }
     public void playSong() {
         soundBehaviour.playSoundFile();
