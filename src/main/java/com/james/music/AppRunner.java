@@ -1,4 +1,4 @@
-package com.james.main;
+package com.james.music;
 
 import javax.swing.*;
 import java.awt.*;

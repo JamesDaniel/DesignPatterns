@@ -1,4 +1,4 @@
-package com.james.main;
+package com.james.music;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +22,7 @@ public class SongFile {
             fis = new FileInputStream(new File(this.getSongPath()));
         } catch (Exception ex) {
             System.out.println("An error occurred while creating file input stream.");
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         return fis;
     }

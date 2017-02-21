@@ -1,4 +1,4 @@
-package com.james.main;
+package com.james.music;
 
 import org.apache.commons.io.FilenameUtils;
 
