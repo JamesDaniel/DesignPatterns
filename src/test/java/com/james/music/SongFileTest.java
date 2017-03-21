@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class SongFileTest {
     @Test
-    public void testSetSongPath()
+    public void SetSongPathTest()
     {
         String songFilePath = "/example/song/path";
 
@@ -23,13 +23,13 @@ public class SongFileTest {
         assertEquals(songFilePath, result);
     }
     @Test
-    public void testGetInstance() {
+    public void GetInstanceTest() {
         SongFile sf = SongFile.getInstance();
 
         assertTrue(sf instanceof SongFile);
     }
     @Test
-    public void testGetFileInputStream() {
+    public void GetFileInputStreamTest() {
         SongFile sf = SongFile.getInstance();
 
         try {

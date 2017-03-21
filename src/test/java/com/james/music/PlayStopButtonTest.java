@@ -10,7 +10,7 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class PlayStopButtonTest {
     @Test
-    public void TestPlayStopButton() {
+    public void PlayStopButtonTest() {
         String btnText = "Play";
         SongPlayer sPlayer = new SongPlayer(null);
 
@@ -19,7 +19,7 @@ public class PlayStopButtonTest {
         assertTrue(btn instanceof PlayStopButton);
     }
     @Test
-    public void testPlayStopButtonText() {
+    public void PlayStopButtonTextTest() {
         String btnText = "Play";
         SongPlayer sPlayer = new SongPlayer(null);
 
@@ -28,7 +28,7 @@ public class PlayStopButtonTest {
         assertEquals(btn.getText(), btnText);
     }
     @Test
-    public void testGetPlayState() {
+    public void GetPlayStateTest() {
         String btnText = "Play";
         SongPlayer sPlayer = new SongPlayer(null);
 
