@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by t00126681 on 21/02/2017.
  */
-public class TestPlayStopButton {
+public class PlayStopButtonTest {
     @Test
     public void TestPlayStopButton() {
         String btnText = "Play";

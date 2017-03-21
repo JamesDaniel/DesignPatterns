@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by t00126681 on 21/02/2017.
  */
-public class TestSongFile {
+public class SongFileTest {
     @Test
     public void testSetSongPath()
     {
